@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>uploader</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+  <ion-card no-padding no-margin class="animate__animated animate__wobble">
+
+    <ion-slides pager="true" [options]="slideOpts"   >
+      <ion-slide *ngFor="let item of [1,2,3]" >
+        <img src="../../assets/images/{{item}}.jpg" alt="">
+      </ion-slide>
+      
+    </ion-slides>
+  </ion-card>
+  <div class="container" style="padding: 20px;">
+
+  <ion-list>
+    <ion-item class="animate__animated animate__fadeInRightBig">
+      <ion-input name="title" id="title" [(ngModel)]="title" placeholder="Video title"></ion-input>
+    </ion-item >
+    <ion-item class="animate__animated animate__fadeInLeftBig">
+      <ion-input name="url" id="url" [(ngModel)]="url" placeholder="Url"></ion-input>
+    </ion-item>
+    <ion-item class="animate__animated animate__fadeInRightBig">
+      <ion-textarea name="desc" id="desc" [(ngModel)]="desc" placeholder="Video description"></ion-textarea>
+    </ion-item>
+    <br>
+    <br>
+    <ion-item class="animate__animated animate__bounceIn" >
+      <ion-button  style="width: 100%;" size="large" expand="block" fill="outline"  (click)="save()">Save </ion-button>
+    </ion-item>
+    
+  </ion-list>
+</div>
+
+</ion-content>

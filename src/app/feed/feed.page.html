@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>feed</ion-title>
+  </ion-toolbar>
+</ion-header> 
+
+<ion-content >
+  <div  *ngIf="posts.size==0">
+      <img style=" position:absolute;
+      left: 0;
+      right: 0;
+      margin:0 auto;
+      top:50%;
+      transform:translateY(-50%);"  src="../../assets/images/data.jpg">
+  </div>
+<div *ngIf="posts.size!=0">
+
+  <div  *ngFor="let post of posts">
+    
+    <ion-card  class="animate__animated animate__flipInX" >
+      <iframe width="100%" height="100%" [src]="sanitizer.bypassSecurityTrustResourceUrl(post.url)" allow="autoplay;"
+      frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen></iframe>
+      <ion-card-header>
+        <ion-card-title>{{post.title}}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        {{post.description}}
+      </ion-card-content>
+    </ion-card>
+    <br>
+  </div>
+  
+</div>
+  <!-- <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll> -->
+</ion-content>

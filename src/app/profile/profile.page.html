@@ -1,0 +1,82 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <!-- <rb-letter-avatar  [avatar-data]='username' avatar-shape="round" avatar-font-size=5000px avatar-font-weight=500 ></rb-letter-avatar> -->
+  <!-- <ion-list>
+  <ion-item>
+    
+  </ion-item>
+</ion-list> -->
+  <!-- <ion-grid>
+<ion-row>
+
+  <ion-col col-10></ion-col>
+  <ion-col >
+  </ion-col>
+</ion-row>
+</ion-grid> -->
+  <br>
+  <form  [formGroup]="form" >
+
+  <ion-avatar class="animate__animated animate__bounceInDown" size="large" style=" 
+          left: 0;
+          right: 0;
+          margin:0 auto;
+          width:50% !important;  
+          height : 50% !important;  
+          max-width: 150px !important; 
+          max-height: 150px !important;
+          ">
+    <img
+      src="https://i1.pngguru.com/preview/48/514/322/button-ui-system-folders-and-drives-yellow-and-white-profile-icon-png-clipart.jpg">
+  </ion-avatar>
+
+  <div class="container" style="padding: 20px;">
+    <ion-list>
+      <!-- <ion-item class="animate__animated animate__lightSpeedInRight">
+        <ion-input type="password" required name="oldPassword" formControlName="oldPassword" id="oldPassword" [(ngModel)]="oldPassword" placeholder="Old password"></ion-input>
+      </ion-item>
+      <ion-item  *ngIf=" !form.controls.oldPassword.valid&&form.controls.oldPassword.touched">
+      <span style="color: red;" class="error ion-padding">
+        Password is required.
+      </span>
+    </ion-item> -->
+      <ion-item class="animate__animated animate__lightSpeedInLeft">
+        <ion-input type="password" name="newPassword" id="newPassword" formControlName="newPassword" [(ngModel)]="newPassword" placeholder="New password"></ion-input>
+      </ion-item>
+      <ion-item  *ngIf=" !form.controls.newPassword.valid&&form.controls.newPassword.touched">
+        <span style="color: red;" class="error ion-padding">
+         Your password must be at least 8 characters long and contain at least one uppercase letter , lowercase letter,digit and  special character.
+        </span>
+      </ion-item>
+      <ion-item class="animate__animated animate__lightSpeedInRight">
+        <ion-input type="password" name="confirmPassword" id="confirmPassword" formControlName="confirmPassword" [(ngModel)]="confirmPassword"
+          placeholder="Confirm password"></ion-input>
+      </ion-item>
+      <ion-item  *ngIf=" !form.controls.confirmPassword.valid&&form.controls.confirmPassword.touched">
+        <span style="color: red;" class="error ion-padding">
+         Your password must be at least 8 characters long and contain at least one uppercase letter , lowercase letter,digit and  special character.
+        </span>
+      </ion-item>
+      <br>
+      <br>
+      <ion-item class="animate__animated animate__lightSpeedInLeft">
+        <ion-button style="width: 100%;" size="large" expand="block"  [disabled]="!form.valid" (click)="cahngePassword()" fill="outline" >Change password</ion-button>
+      </ion-item>
+      <br>
+      <ion-item class="animate__animated animate__lightSpeedInRight">
+        <ion-button style="width: 100%;" size="large" expand="block" fill="outline" (click)="logout()">Log Out
+        </ion-button>
+      </ion-item>
+
+    </ion-list>
+  </div>
+
+</form>
+
+</ion-content>
