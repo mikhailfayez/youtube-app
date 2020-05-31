@@ -39,7 +39,7 @@ export class LoginPage implements OnInit {
         this.storage.set('username', name);
         this.presentToast('success', 'You have been loged in  successuflly')
         
-        this.nav.navigateForward(['tabs'])
+        this.nav.navigateForward(['tabs',res.user.uid])
       }
     } catch (error) {
       if (error == 'auth/user-not-found') {

@@ -55,6 +55,7 @@ export class FeedPage implements OnInit {
               var it = this.posts.values();
               var first = it.next();
               this.youtubeUrl = first.value.url
+              
             }
           })
         }

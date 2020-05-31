@@ -5,36 +5,51 @@
 </ion-header>
 
 <ion-content>
-  <div     class="slide">
+  <div class="slide">
     <img class="animate__animated animate__heartBeat" src="../../assets/images/register.jpg" alt="">
   </div>
-  
+
   <ion-list>
-    
+
     <div class="container" style="padding: 20px;">
 
-<ion-item class="animate__animated animate__fadeInRightBig"  >
-  <ion-label  position="stacked" >Usernaem</ion-label>
-  <ion-input  [(ngModel)]="username" name="username" id=username type="text"></ion-input>
-</ion-item>
-<ion-item class="animate__animated animate__fadeInLeftBig" >
-  <ion-label position="stacked"  >Password</ion-label>
-  <ion-input type="password" [(ngModel)]="password" name="password" id="password" ></ion-input>
-</ion-item>
-<ion-item class="animate__animated animate__fadeInRightBig" >
-  <ion-label position="stacked"  >Confirm Password</ion-label>
-  <ion-input type="password" [(ngModel)]="cpassword" name="cpassword" id="cpassword" ></ion-input>
-</ion-item>
-<br>
-<a class="animate__animated animate__fadeInLeftBig" style ="margin-left: 27%;" routerLink='/login'>Already have an account ? </a>
-<br>
-  <br>
+      <ion-item class="animate__animated animate__fadeInRightBig">
+        <ion-label position="stacked">Usernaem</ion-label>
+        <ion-input [(ngModel)]="username" name="username" id=username type="text"></ion-input>
+      </ion-item>
+      <ion-item class="animate__animated animate__fadeInLeftBig">
+        <ion-label position="stacked">Password</ion-label>
+        <ion-input type="password" [(ngModel)]="password" name="password" id="password"></ion-input>
+      </ion-item>
+      <ion-item class="animate__animated animate__fadeInRightBig">
+        <ion-label position="stacked">Confirm Password</ion-label>
+        <ion-input type="password" [(ngModel)]="cpassword" name="cpassword" id="cpassword"></ion-input>
+      </ion-item>
+      <ion-radio-group value="grape"  [(ngModel)]="role" >
+        <ion-list-header>
+          <ion-label>Rules</ion-label>
+        </ion-list-header>
+        <ion-item>
+          <ion-label>Admin</ion-label>
+          <ion-radio slot="start" color="success" value="admin"></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>User</ion-label>
+          <ion-radio slot="start" color="tertiary" value="user"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+      <br>
+      <a class="animate__animated animate__fadeInLeftBig" style="margin-left: 27%;" routerLink='/login'>Already have an
+        account ? </a>
+      <br>
+      <br>
 
-<ion-item class="animate__animated animate__fadeInRightBig" >
-  <ion-button  style="width: 100%;" size="large" expand="block" fill="outline" (click)="register()">Register </ion-button>
-</ion-item>
+      <ion-item class="animate__animated animate__fadeInRightBig">
+        <ion-button style="width: 100%;" size="large" expand="block" fill="outline" (click)="register()">Register
+        </ion-button>
+      </ion-item>
 
-</div>
+    </div>
 
   </ion-list>
 </ion-content>

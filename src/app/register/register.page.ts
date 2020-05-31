@@ -15,6 +15,7 @@ export class RegisterPage implements OnInit {
   username: string
   password: string
   cpassword: string
+  role:string
   constructor(
     public auth: AngularFireAuth,
     public toastController: ToastController,
@@ -39,15 +40,17 @@ export class RegisterPage implements OnInit {
       console.log(res);
       this.presentToast('success', 'You have been registered successuflly')
       this.fireStore.doc(`/users/${res.user.uid}`).set({
-        Username: this.username
+        Username: this.username,
+        role:this.role
       })
       this.storage.set('uid', res.user.uid);
+      this.storage.set('role',this.role);
       this.storage.set('username', this.username.split('@')[0]);
       this.user.setUser({
         username: this.username,
-        uid: res.user.uid
+        uid: res.user.uid,
       })
-      this.nav.navigateForward(['tabs'])
+      this.nav.navigateForward(['tabs',res.user.uid])
 
     } catch (error) {
       console.log(error)
@@ -83,4 +86,5 @@ export class RegisterPage implements OnInit {
     const { role, data } = await loading.onDidDismiss();
     console.log('Loading dismissed!');
   }
+
 }
