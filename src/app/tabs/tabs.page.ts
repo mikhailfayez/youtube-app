@@ -42,22 +42,24 @@ export class TabsPage implements OnInit {
   }
   getData() {
     // this.storage.get('uid').then((val) => {
-    try {
-      const snapshot = this.fireStore.collection('users').doc(this.uid).get().subscribe(snapshot => {
-        let data = snapshot.data()
-        if (data.role) {
-          this.role = data.role
-          if (this.role == "admin") {
-            this.flag = true
+    if (this.uid) {
+      try {
+        const snapshot = this.fireStore.collection('users').doc(this.uid).get().subscribe(snapshot => {
+          let data = snapshot.data()
+          if (data.role) {
+            this.role = data.role
+            if (this.role == "admin") {
+              this.flag = true
+            }
           }
-        }
-        else {
-          this.flag = false
-        }
-      })
-    } catch (error) {
-      console.dir(error)
+          else {
+            this.flag = false
+          }
+        })
+      } catch (error) {
+        console.dir(error)
+      }
+      // });
     }
-    // });
   }
 }
