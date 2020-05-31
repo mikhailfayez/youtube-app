@@ -5,14 +5,14 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { UploaderPageRoutingModule } from './uploader-routing.module';
-
+import { ReactiveFormsModule } from '@angular/forms';
 import { UploaderPage } from './uploader.page';
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    UploaderPageRoutingModule
+    UploaderPageRoutingModule,  ReactiveFormsModule
   ],
   providers: [
 ],

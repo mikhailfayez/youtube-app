@@ -4,7 +4,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { auth, firestore } from 'firebase/app';
-import { ToastController, NavController, IonInfiniteScroll } from '@ionic/angular';
+import { ToastController, NavController, IonInfiniteScroll, LoadingController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 
 @Component({
@@ -13,11 +13,9 @@ import { Storage } from '@ionic/storage';
   styleUrls: ['./feed.page.scss'],
 })
 export class FeedPage implements OnInit {
-  videourl: string
-  // posts: posts[] = []
+  youtubeUrl = ""
   posts = new Set<posts>();
   @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
-
   constructor(public navCtrl: NavController,
     public sanitizer: DomSanitizer,
     public auth: AngularFireAuth,
@@ -25,21 +23,19 @@ export class FeedPage implements OnInit {
     public nav: NavController,
     public fireStore: AngularFirestore,
     public user: UserService,
-    private storage: Storage) {
+    private storage: Storage,
+    public loadingController: LoadingController
 
-    this.videourl = "https://www.youtube.com/watch?v=HXEnjsHpSTc&list=PLYxzS__5yYQnpK36-GJjm7IEAuHR7IExa&index=6"
-    const videoId = this.getId(this.videourl);
-    this.videourl = 'https://www.youtube.com/embed/' + videoId;
-    console.log(this.videourl)
+  ) {
+
   }
-  ionViewWillEnter	(){
-    console.log("aaaaaaaa");
-    
+  ionViewWillEnter() {
     this.getData();
   }
   ngOnInit() {
-    
-this.getData();
+    this.presentLoading()
+    this.getData();
+
   }
   getId(url) {
     const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
@@ -50,13 +46,16 @@ this.getData();
   }
   async getData() {
     const snapshot = await this.fireStore.collection('users').get().subscribe(snapshot => {
-      console.log("Aaaaaa");
-      
-      this.posts= new Set<posts>();
+      this.posts = new Set<posts>();
       snapshot.forEach(doc => {
         if (doc.data()['posts'] != null && doc.data()['posts'] != undefined) {
           doc.data().posts.forEach((a: posts) => {
-              this.posts.add(a)
+            this.posts.add(a)
+            if (this.posts.size > 0) {
+              var it = this.posts.values();
+              var first = it.next();
+              this.youtubeUrl = first.value.url
+            }
           })
         }
       });
@@ -74,13 +73,28 @@ this.getData();
     //   }
     // }, 500);
   }
-
+  onClick(post) {
+    this.youtubeUrl = post.url
+  }
   toggleInfiniteScroll() {
     // this.infiniteScroll.disabled = !this.infiniteScroll.disabled;
+  }
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'Please wait...',
+      duration: 1500
+    });
+    await loading.present();
+
+    const { role, data } = await loading.onDidDismiss();
+    console.log('Loading dismissed!');
   }
 }
 export interface posts {
   url: string
   title: string
   description: string
+  imagUrl: string
+
 }

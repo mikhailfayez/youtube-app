@@ -13,12 +13,12 @@
       top:50%;
       transform:translateY(-50%);"  src="../../assets/images/data.jpg">
   </div>
-<div *ngIf="posts.size!=0">
+<!-- <div > -->
 
-  <div  *ngFor="let post of posts">
+  <!-- <div  *ngFor="let post of posts">
     
     <ion-card  class="animate__animated animate__flipInX" >
-      <iframe width="100%" height="100%" [src]="sanitizer.bypassSecurityTrustResourceUrl(post.url)" allow="autoplay;"
+      <iframe width="100%" height="100%" [src]="post.url | safe" 
       frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
       allowfullscreen></iframe>
       <ion-card-header>
@@ -27,11 +27,53 @@
       <ion-card-content>
         {{post.description}}
       </ion-card-content>
-    </ion-card>
+    </ion-card> 
+    <br>
+  </div> -->
+<!-- </div> -->
+  <div  *ngIf="posts.size!=0" >
+    <ion-card  class="animate__animated animate__fadeInDown" >
+      <iframe  id="test" width="100%" height="100%" [src]="youtubeUrl|safe" 
+      frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen></iframe>
+      <ion-card-header>
+        <ion-card-title>title</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        description
+      </ion-card-content>
+    </ion-card> 
     <br>
   </div>
   
-</div>
+  <ion-list class="animate__animated animate__fadeInUp" >
+    <ion-item-group >
+      <ion-item-divider sticky>
+        <ion-label>
+          Videos 
+        </ion-label>
+      </ion-item-divider>
+
+      <ion-item-sliding  *ngFor="let post of posts" >
+        <ion-item [routerLink]="" (click)="onClick(post)" >
+          <ion-avatar *ngIf="!post.imagUrl" slot="start">
+            <img src="../../assets/images/youtube.png">
+          </ion-avatar>
+          <ion-avatar *ngIf="post.imagUrl" slot="start">
+            <img [src]="post.imagUrl">
+          </ion-avatar>
+          <ion-label>
+            <h3>{{post.title}}</h3>
+            <p>
+              {{post.description}}
+            </p>
+          </ion-label>
+        </ion-item>
+      </ion-item-sliding>
+    </ion-item-group>
+  </ion-list>
+  
+  
   <!-- <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
     <ion-infinite-scroll-content
       loadingSpinner="bubbles"

@@ -1,3 +1,4 @@
+import { SafePipe } from './player-component.pipe';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -15,6 +16,6 @@ import { FeedPage } from './feed.page';
     IonicModule,
     FeedPageRoutingModule
   ],
-  declarations: [FeedPage]
+  declarations: [FeedPage, SafePipe]
 })
 export class FeedPageModule {}

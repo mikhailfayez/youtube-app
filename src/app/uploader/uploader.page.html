@@ -5,6 +5,8 @@
 </ion-header>
 
 <ion-content >
+  <form  [formGroup]="form" >
+
   <ion-card no-padding no-margin class="animate__animated animate__wobble">
 
     <ion-slides pager="true" [options]="slideOpts"   >
@@ -18,21 +20,37 @@
 
   <ion-list>
     <ion-item class="animate__animated animate__fadeInRightBig">
-      <ion-input name="title" id="title" [(ngModel)]="title" placeholder="Video title"></ion-input>
+      <ion-input name="title" id="title" formControlName="title" [(ngModel)]="title" placeholder="Video title"></ion-input>
     </ion-item >
+    <ion-item  *ngIf=" !form.controls.title.valid&&form.controls.title.touched">
+      <span style="color: red;" class="error ion-padding">
+       Title is required .  
+      </span>
+    </ion-item>
     <ion-item class="animate__animated animate__fadeInLeftBig">
-      <ion-input name="url" id="url" [(ngModel)]="url" placeholder="Url"></ion-input>
+      <ion-input name="url" id="url" formControlName="url"  [(ngModel)]="url" placeholder="Url"></ion-input>
+    </ion-item>
+    <ion-item  *ngIf=" !form.controls.url.valid&&form.controls.url.touched">
+      <span style="color: red;" class="error ion-padding">
+        Url is required .
+      </span>
     </ion-item>
     <ion-item class="animate__animated animate__fadeInRightBig">
-      <ion-textarea name="desc" id="desc" [(ngModel)]="desc" placeholder="Video description"></ion-textarea>
+      <ion-textarea name="desc" id="desc" formControlName="desc"  [(ngModel)]="desc" placeholder="Video description"></ion-textarea>
+    </ion-item>
+    <ion-item  *ngIf=" !form.controls.desc.valid&&form.controls.desc.touched">
+      <span style="color: red;" class="error ion-padding">
+        Description is required .
+      </span>
     </ion-item>
     <br>
     <br>
     <ion-item class="animate__animated animate__bounceIn" >
-      <ion-button  style="width: 100%;" size="large" expand="block" fill="outline"  (click)="save()">Save </ion-button>
+      <ion-button  style="width: 100%;" size="large" expand="block" fill="outline"  [disabled]="!form.valid" (click)="save()">Save </ion-button>
     </ion-item>
     
   </ion-list>
 </div>
+</form>
 
 </ion-content>
