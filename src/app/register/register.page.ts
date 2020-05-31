@@ -31,7 +31,8 @@ export class RegisterPage implements OnInit {
   }
   async register() {
     if (this.cpassword != this.password) {
-      return console.error("Password don't match");
+      //  console.error("Password don't match");
+       return this.presentToast("danger", "Password don't match")
 
     }
     this.presentLoading()
